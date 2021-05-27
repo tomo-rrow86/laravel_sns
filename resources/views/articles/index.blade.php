@@ -13,10 +13,10 @@
                 <i class="fas fa-user-circle fa-3x mr-1"></i>
                 <div>
                     <div class="font-weight-bold">
-                        ユーザー名
+                        {{ $article->name }}
                     </div>
                     <div class="font-weight-lighter">
-                        2020/2/1 12:00
+                        {{ $article->title }}
                     </div>
                 </div>
                 @if( Auth::id() === $article->user_id )
@@ -29,18 +29,18 @@
                                 </button>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{{ route("articles.edit", ['article' => $article]) }}">
+                            <a class="dropdown-item" href="{{ route("articles.edit", ['article' => $article->article_id]) }}">
                                 <i class="fas fa-pen mr-1"></i>記事を更新する
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $article->id }}">
+                            <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $article->article_id }}">
                                 <i class="fas fa-trash-alt mr-1"></i>記事を削除する
                             </a>
                             </div>
                         </div>
                     </div>
                     <!-- dropdown -->
-  
+
                     <!-- modal -->
                     <div id="modal-delete-{{ $article->id }}" class="modal fade" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
@@ -50,7 +50,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST" action="{{ route('articles.destroy', ['article' => $article]) }}">
+                                <form method="POST" action="{{ route('articles.destroy', ['article' => $article->article_id]) }}">
                                     @csrf
                                     @method('DELETE')
                                     <div class="modal-body">
@@ -69,10 +69,10 @@
             </div>
                 <div class="card-body pt-0 pb-2">
                     <h3 class="h4 card-title">
-                        記事タイトル
+                        {{ $article->title }}
                     </h3>
                     <div class="card-text">
-                        記事本文
+                        {{ $article->body }}
                     </div>
                 </div>
             </div>
